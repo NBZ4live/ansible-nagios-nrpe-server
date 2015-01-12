@@ -1,9 +1,9 @@
-[![Build Status](https://travis-ci.org/NBZ4live/ansible-nagios-nrpe-server.png?branch=master)](https://travis-ci.org/NBZ4live/ansible-nagios-nrpe-server)
+[![Build Status](https://travis-ci.org/NBZ4live/ansible-nagios-nrpe-server.png?branch=master)](https://travis-ci.org/NBZ4live/ansible-nagios-nrpe-server)[![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-nagios--nrpe--server-blue.svg)](https://galaxy.ansible.com/list#/roles/2567)
 
-ansible-nagios-nrpe-server
+nagios-nrpe-server
 ========
 
-This role installs and configures the ansible-nagios-nrpe-server.
+This role installs and configures the nagios-nrpe-server.
 
 Requirements
 ------------
