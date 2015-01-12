@@ -1,0 +1,9 @@
+---
+nagios_nrpe_server_config_d_name: 50_ansible.cfg
+nagios_nrpe_server_apt_packages:
+  - nagios-nrpe-server
+  - nagios-plugins-extra
+
+nagios_nrpe_server_config:
+  server_port: 5666
+  allowed_hosts: 127.0.0.1

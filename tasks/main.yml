@@ -1,0 +1,34 @@
+---
+- name: Add the OS specific varibles
+  include_vars: "{{ ansible_os_family }}.yml"
+
+- name: Install the nrpe server packages
+  apt: name={{ item }} state=present update_cache=yes
+  with_items: nagios_nrpe_server_apt_packages
+  environment: env
+  when: ansible_os_family == "Debian"
+  tags: [packages,nrpe-server]
+
+- name: Configure the nrpe server
+  template: >
+    src=50_ansible.cfg.j2
+    dest={{ nagios_nrpe_server_config_d_path }}/{{ nagios_nrpe_server_config_d_name }}
+    mode=644
+    backup=yes
+  when: nagios_nrpe_server_config|lower != 'none'
+  notify:
+   - restart nagios-nrpe-server
+  tags: [configuration,nrpe-server]
+
+- name: Copy the plugins
+  copy: >
+    src={{ item }}
+    dest={{ nagios_nrpe_server_plugins_path }}/
+    mode=755
+  with_fileglob:
+    - ../../../files/nagios-plugins/*
+  tags: [configuration,nrpe-server]
+
+- name: Start the nagios-nrpe-server service
+  service: name={{ nagios_nrpe_server_service_name }} state=started enabled=yes
+  tags: [service,nrpe-server]

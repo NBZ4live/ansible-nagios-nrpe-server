@@ -1,0 +1,5 @@
+#{{ ansible_managed }}
+
+{% for directive, value in nagios_nrpe_server_config.iteritems() %}
+{{ directive }}={{ value }}
+{% endfor %}
