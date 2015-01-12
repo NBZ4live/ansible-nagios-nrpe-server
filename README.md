@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/NBZ4live/ansible-nagios-nrpe-server.png?branch=master)](https://travis-ci.org/NBZ4live/ansible-nagios-nrpe-server)[![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-nagios--nrpe--server-blue.svg)](https://galaxy.ansible.com/list#/roles/2567)
+[![Build Status](http://img.shields.io/travis/NBZ4live/ansible-nagios-nrpe-server.svg?style=flat)](https://travis-ci.org/NBZ4live/ansible-nagios-nrpe-server) [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-nagios--nrpe--server-blue.svg?style=flat)](https://galaxy.ansible.com/list#/roles/2567)
 
 nagios-nrpe-server
 ========
