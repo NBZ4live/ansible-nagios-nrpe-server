@@ -24,6 +24,12 @@ The role uses the following variables:
  - **nagios_nrpe_server_commands**: Configuration of custom commands.
  - **nagios_nrpe_server_sudo_commands**: Configuration of commands for the sudoers file.
 
+Global Variables
+--------------
+This variables are without a namespace to be used across the entire playbook
+ - **apt_cache_valid_time**: Used for ```cache_valid_time``` in the apt module.
+  Defaults to ```86400```
+
 Example configuration
 --------------
 

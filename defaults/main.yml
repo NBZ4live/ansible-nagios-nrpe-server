@@ -1,4 +1,6 @@
 ---
+apt_cache_valid_time: 86400
+
 nagios_nrpe_server_config_d_name: 50_ansible.cfg
 nagios_nrpe_server_sudoers_d_name: 50-ansible-nagios-nrpe-server
 nagios_nrpe_server_apt_packages:
@@ -10,3 +12,4 @@ nagios_nrpe_server_config:
   allowed_hosts: 127.0.0.1
 
 nagios_nrpe_server_commands: []
+nagios_nrpe_server_sudo_commands: []
