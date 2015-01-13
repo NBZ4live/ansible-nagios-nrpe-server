@@ -1,4 +1,6 @@
 ---
+nagios_nrpe_server_user: nagios
 nagios_nrpe_server_config_d_path: /etc/nagios/nrpe.d
 nagios_nrpe_server_service_name: nagios-nrpe-server
 nagios_nrpe_server_plugins_path: /usr/lib/nagios/plugins
+nagios_nrpe_server_sudoers_d_path: /etc/sudoers.d

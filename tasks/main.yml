@@ -11,7 +11,7 @@
 
 - name: Configure the nrpe server
   template: >
-    src=50_ansible.cfg.j2
+    src=nrpe.cfg.j2
     dest={{ nagios_nrpe_server_config_d_path }}/{{ nagios_nrpe_server_config_d_name }}
     mode=644
     backup=yes
@@ -29,6 +29,17 @@
     mode=755
   with_fileglob:
     - ../../../files/nagios-plugins/*
+  tags: [configuration,nrpe-server]
+
+- name: Configure sudoers
+  template: >
+    src=sudoers.j2
+    dest={{ nagios_nrpe_server_sudoers_d_path }}/{{ nagios_nrpe_server_sudoers_d_name }}
+    mode=0640
+    validate="visudo -cf %s"
+  when: >
+      nagios_nrpe_server_commands|length > 0
+      or nagios_nrpe_server_sudo_commands|length > 0
   tags: [configuration,nrpe-server]
 
 - name: Start the nagios-nrpe-server service
