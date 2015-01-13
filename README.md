@@ -21,6 +21,8 @@ The role uses the following variables:
   ```apt``` module, defaults to ```[nagios-nrpe-server, nagios-plugins-extra]```.
  - **nagios_nrpe_server_config**: Customization for nrpe's configuration file as a list
    of options.
+ - **nagios_nrpe_server_commands**: Configuration of custom commands.
+ - **nagios_nrpe_server_sudo_commands**: Configuration of commands for the sudoers file.
 
 Example configuration
 --------------
@@ -59,7 +61,57 @@ Example usage
             nagios_nrpe_server_config:
               command[check_load]: /usr/lib/nagios/plugins/check_load -w 30,25,20 -c 45,40,35
               command[check_custom_directory_disk]: /usr/lib/nagios/plugins/check_disk -w 15% -c 10% -p /path/to/my/directory
-        
+            nagios_nrpe_server_commands:
+              - name: check_users
+                line: /usr/lib/nagios/plugins/check_users -w 5 -c 10
+              - name: check_load
+                plugin: check_load
+                args: -w 15,10,5 -c 30,25,20
+              - name: check_hda1
+                plugin: check_disk
+                args: -w 20% -c 10% -p /dev/hda1
+                sudo: true
+            nagios_nrpe_server_sudo_commands:
+              - /usr/lib/nagios/plugins/check_procs
+              - check_mysql
+
+Command configuration
+-------
+This role implements different types of command definition.
+You can define them as:
+
+1. Configuration lines in ```nagios_nrpe_server_config```
+2. Command lines in ```nagios_nrpe_server_commands```
+3. Plugins in ```nagios_nrpe_server_commands```
+
+### nagios_nrpe_server_config
+    nagios_nrpe_server_config:
+      command[check_load]: /usr/lib/nagios/plugins/check_load -w 30,25,20 -c 45,40,35
+      command[check_custom_directory_disk]: sudo /usr/lib/nagios/plugins/check_disk -w 15% -c 10% -p /path/to/my/directory
+
+If a command was defined as a configuration line but needs to be added to the sudoers file
+nagios_nrpe_server_sudo_commands can be used.
+
+    nagios_nrpe_server_sudo_commands:
+      - /usr/lib/nagios/plugins/check_procs
+      - check_mysql
+This will add the following to the file in sudoers.d:
+
+    nagios ALL=NOPASSWD: /usr/lib/nagios/plugins/check_procs
+    nagios ALL=NOPASSWD: /usr/lib/nagios/plugins/check_mysql
+
+### nagios_nrpe_server_commands with command lines
+    nagios_nrpe_server_commands:
+      - name: check_users
+        line: /usr/lib/nagios/plugins/check_users -w 5 -c 10
+
+### nagios_nrpe_server_commands with plugin
+    nagios_nrpe_server_commands:
+      - name: check_hda1
+        plugin: check_disk
+        args: -w 20% -c 10% -p /dev/hda1
+        sudo: true
+
 License
 -------
 
