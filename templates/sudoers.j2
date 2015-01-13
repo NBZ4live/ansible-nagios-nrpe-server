@@ -16,12 +16,10 @@
 
 # nagios_nrpe_server_sudo_commands
 {% for item in nagios_nrpe_server_sudo_commands if nagios_nrpe_server_sudo_commands|length > 0 -%}
-  {% if item.plugin is defined -%}
-    {% if item.plugin|match("/.*") -%}
-      {% set command = item.plugin -%}
-    {% else -%}
-      {% set command = nagios_nrpe_server_plugins_path ~ "/" ~ item.plugin -%}
-    {% endif -%}
-  {{ nagios_nrpe_server_user }} ALL=NOPASSWD: {{ command }}
+  {% if item|match("/.*") -%}
+    {% set command = item -%}
+  {% else -%}
+    {% set command = nagios_nrpe_server_plugins_path ~ "/" ~ item -%}
   {% endif -%}
+  {{ nagios_nrpe_server_user }} ALL=NOPASSWD: {{ command }}
 {% endfor -%}
