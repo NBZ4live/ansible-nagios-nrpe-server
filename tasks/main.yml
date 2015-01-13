@@ -15,7 +15,9 @@
     dest={{ nagios_nrpe_server_config_d_path }}/{{ nagios_nrpe_server_config_d_name }}
     mode=644
     backup=yes
-  when: nagios_nrpe_server_config|lower != 'none'
+  when: >
+    nagios_nrpe_server_config|length > 0
+    or nagios_nrpe_server_commands|length > 0
   notify:
    - restart nagios-nrpe-server
   tags: [configuration,nrpe-server]

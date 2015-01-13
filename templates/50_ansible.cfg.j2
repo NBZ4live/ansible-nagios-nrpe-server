@@ -1,5 +1,27 @@
 #{{ ansible_managed }}
 
-{% for directive, value in nagios_nrpe_server_config.iteritems() %}
+# Configs
+{% for directive, value in nagios_nrpe_server_config.iteritems() if nagios_nrpe_server_config|length > 0 %}
 {{ directive }}={{ value }}
+{% endfor %}
+
+# Commands
+{% for item in nagios_nrpe_server_commands if nagios_nrpe_server_commands|length > 0 %}
+  {% set command = "command[" ~ item.name ~ "]=" -%}
+  {% if item.sudo is defined and item.sudo -%}
+    {% set command = command ~ "sudo " -%}
+  {% endif -%}
+  {% if item.line is defined -%}
+    {% set command = command ~ item.line -%}
+  {% elif item.plugin is defined -%}
+    {% if item.plugin|match("/.*") -%}
+      {% set command = command ~ item.plugin -%}
+    {% else -%}
+      {% set command = command ~ nagios_nrpe_server_plugins_path ~ "/" ~ item.plugin -%}
+    {% endif -%}
+    {% if item.args is defined -%}
+      {% set command = command ~ " " ~ item.args -%}
+    {% endif -%}
+  {% endif -%}
+{{ command }}
 {% endfor %}
