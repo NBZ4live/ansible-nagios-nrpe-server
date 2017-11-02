@@ -8,7 +8,7 @@ This role installs and configures the nagios-nrpe-server.
 Requirements
 ------------
 
-This role requires Ansible 1.4 or higher and tested platforms are listed in the metadata file.
+This role requires Ansible 2.0 or higher and tested platforms are listed in the metadata file.
 
 Role Variables
 --------------

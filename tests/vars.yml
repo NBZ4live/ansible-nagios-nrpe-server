@@ -1,4 +1,6 @@
 ---
+role_path: ".."
+
 nagios_nrpe_server_config:
   server_port: 5666
   allowed_hosts: 127.0.0.1

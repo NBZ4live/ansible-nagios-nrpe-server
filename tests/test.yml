@@ -6,6 +6,6 @@
     - '../defaults/main.yml'
     - 'vars.yml'
   tasks:
-    - include: '../tasks/main.yml'
+    - include_tasks: '../tasks/main.yml'
   handlers:
     - include: '../handlers/main.yml'
