@@ -4,7 +4,7 @@ galaxy_info:
   description: Installs and configures a Nagios NRPE Server
   company: My.com B.V.
   license: BSD
-  min_ansible_version: 1.4
+  min_ansible_version: 2.0
   platforms:
   - name: Ubuntu
     versions:
